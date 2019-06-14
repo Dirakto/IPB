@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Wyślij zgłoszenie";
+}
+@model ListWrapper
+<span style="display: block; text-align: right; background-color: black;"><a style="color: white; margin-right: 10px;" asp-controller="Home" asp-action="Index">Wyloguj</a></span>
+<div class="panel panel-default">
+    <div class="panel-heading text-center"><h4>Złóż podanie</h4></div>
+    <div class="panel-body">
+    <form asp-controller="System" asp-action="Save" method="post">
+        <div class="form-group">
+            <label asp-for="@Model.List.Title">Tytuł</label>
+            <input class="form-control" asp-for="@Model.List.Title" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.List.GraczName">Nick Gracza</label>
+            <input class="form-control" asp-for="@Model.List.GraczName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.List.Opis"></label>
+            <textarea class="form-control" rows="3" type="textarea" asp-for="@Model.List.Opis"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Kategoria</label>
+            <select class="form-control" asp-for="@Model.List.Kategoria" asp-items="@(new SelectList(@Model.Kategorie))">
+            </select>
+        </div>
+        <div class="text-center">
+        <button class="btn btn-info" type="submit">Wyślij</button>
+        </div>
+    </form>
+    </div>
+    </div>
+</div>
+    @if(Model.canRender){
+        <p>Wysłano</p>
+    }
+
+    <div class="panel-body">
+        <h2>Lista zgłoszeń</h2>
+        <table class="table table-sm table-striped table-bordered">
+            <tr>
+            <th>Id</th>
+            <th>Tytul</th>
+            <th>Kategoria</th>
+            <th>Stan</th>
+        </tr>
+
+        @foreach(var list in Model.Listy)
+        {
+            <tr>
+                <td>@list.Id</td>
+                <td>@list.Title</td>
+                @switch ((int)list.Kategoria)
+                {
+                    case 0: <td>Pytanie ogólne</td>; break;
+                    case 1: <td>Pytanie techniczne</td>; break;
+                    case 2: <td>Zgłoszenie gracza</td>; break;
+                }
+                <td>@list.Stan.ToString()</td>
+            </tr>
+        }
+        </table>
+    </div>

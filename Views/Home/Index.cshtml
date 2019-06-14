@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+@model LoginInfo
+
+<div class="panel panel-success">
+    <div class="panel-heading text-center"><h4>Zaloguj</h4></div>
+    <div class="panel-body">
+        <form asp-action="Login" method="post" class="p-a-1">
+            <div class="form-group">
+                <label asp-for="Name">Login</label>
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Haslo</label>
+                <input class="form-control" asp-for="Password" />
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary" type="submit">Zaloguj</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>

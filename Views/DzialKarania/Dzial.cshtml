@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Panel administracyjny";
+}
+@model List<List>
+
+<span style="display: block; background-color: black; text-align: right;">
+    <a style="color: white; margin-right: 10px;" asp-controller="Home" asp-action="Index">Wyloguj</a></span>
+
+<div class="panel-body">
+    <h2>Zgłoszenia do rozpatrzenia</h2>
+    <table class="table table-lg table-striped table-bordered">
+        <tr>
+        <th>Id</th>
+        <th>Tytul</th>
+        <th></th>
+    </tr>
+
+    @foreach(var list in Model)
+    {            
+        <tr>
+            <td>@list.Id</td>
+            <td>@list.Title</td>
+            <td class="text-center">
+                <form asp-action="CheckList" style="display: inline" method="post">
+                    <input type="hidden" name="id" value=@(list.Id) />
+                    <button type="submit" asp-action="CheckList">Przeczytaj</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </table>
+</div>
